@@ -114,9 +114,21 @@
             * Using multiple attention heads allows the model to capture a richer set of dependencies in the input sequence.
             * For example, one head might focus on the overall sentence structure, while another zooms in on specific details.
             * By combining these diverse perspectives, Multi-Head Attention provides a more comprehensive understanding of the input, much like how humans consider multiple aspects of information simultaneously.
-    - STEP 3.2: Normalization and Residual Connections:
+    - STEP 3.2: Post-Layer Normalization (Post-LN) / Normalization and Residual Connections:
+        - Each sub-layer in an encoder layer is followed by a normalization step. 
+        - Also, each sub-layer output is added to its input (residual connection) to help mitigate the vanishing gradient problem, allowing deeper models
     - STEP 3.3: Feed-Forward Neural Network:
+    <br>FFN(x) = max (0, xW1 + b1) W2 + b2
+        - The FFNs in the encoder and decoder are fully connected.
+        - The FFN is a position-wise network. Each position is processed separately and in an identical way.
+        - The FFN contains two layers and applies a ReLU activation function.
+        - The input and output of the FFN layers is dmodel = 512, but the inner layer is larger with dff =2048.
+        - The FFN can be viewed as performing two convolutions with size 1 kernels.
     - STEP 4: Output of the Encoder:
+        - The output of the final encoder layer is a set of vectors, each representing the input sequence with a rich contextual understanding.
+        - This output is then used as the input for the decoder in a Transformer model.
+
+# The Decoder:
 
 
 # Misc Notes:
